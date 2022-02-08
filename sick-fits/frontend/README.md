@@ -1,1 +1,4 @@
-npm run dev - localhost:7777
+# Get Started
+
+**Start**: 'npm run dev' <br>
+**Localhost**: 7777
