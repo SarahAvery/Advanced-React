@@ -1,4 +1,9 @@
 {
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "vue-html": "html",
+  },
+  "emmet.triggerExpansionOnTab": true,
   "editor.formatOnSave": true,
   "[javascript]": {
     "editor.formatOnSave": false
