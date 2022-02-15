@@ -7,6 +7,8 @@ import {
 import { User } from './schemas/User';
 import 'dotenv/config';
 import { Product } from './schemas/Product';
+import { ProductImage } from './schemas/ProductImage';
+import { insertSeedData } from './seed-data';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -38,15 +40,22 @@ export default withAuth(
       // TODO: schema items go here
       User,
       Product,
+      ProductImage,
     }),
     db: {
       adapter: 'mongoose',
       url: databaseURL,
-      // TODO: add data seeding  here
+      async onConnect(keystone) {
+        console.log('Connected to the databse 🌵');
+        if (process.argv.includes('--seed-data')) {
+          await insertSeedData(keystone);
+        }
+      },
     },
     ui: {
       // TODO: change this for roles
       // show the ui for anyone who passes this test
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       isAccessAllowed: ({ session }) => !!session?.data,
     },
     session: withItemData(statelessSessions(sessionConfig), {
