@@ -7,6 +7,7 @@ import {
 import { User } from './schemas/User';
 import 'dotenv/config';
 import { Product } from './schemas/Product';
+import { ProductImage } from './schemas/ProductImage';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -38,6 +39,7 @@ export default withAuth(
       // TODO: schema items go here
       User,
       Product,
+      ProductImage,
     }),
     db: {
       adapter: 'mongoose',
@@ -47,6 +49,7 @@ export default withAuth(
     ui: {
       // TODO: change this for roles
       // show the ui for anyone who passes this test
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       isAccessAllowed: ({ session }) => !!session?.data,
     },
     session: withItemData(statelessSessions(sessionConfig), {
