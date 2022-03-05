@@ -7,7 +7,6 @@ export default function formatMoney(amount = 0) {
 
   if (amount % 100 === 0) {
     options.minimumFractionDidgits = 0;
-    console.log(options.minimumFractionDidgits);
   }
 
   const formatter = Intl.NumberFormat('en-CA', options);
