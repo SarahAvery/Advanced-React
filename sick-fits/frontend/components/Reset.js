@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/client';
@@ -11,61 +12,56 @@ const ParaStyle = styled.p`
   font-size: 16px;
 `;
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION(
+const RESET_MUTATION = gql`
+  mutation RESET_MUTATION(
     $email: String!
-    $name: String!
+    $token: String!
     $password: String!
   ) {
-    createUser(data: { email: $email, name: $name, password: $password }) {
-      id
-      email
-      name
+    redeemUserPasswordResetToken(
+      email: $email
+      token: $token
+      password: $password
+    ) {
+      code
+      message
     }
   }
 `;
-export default function SignUp() {
+
+export default function Reset({ token }) {
   const { inputs, handleChange, resetForm } = useForm({
     email: '',
-    name: '',
     password: '',
+    token,
   });
 
-  const [signup, { data, loading, error }] = useMutation(SIGNUP_MUTATION, {
+  const [reset, { data, loading, error }] = useMutation(RESET_MUTATION, {
     variables: inputs,
   });
+
+  const successfulError = data?.redeemUserPasswordResetToken?.code
+    ? data?.redeemUserPasswordResetToken
+    : undefined;
 
   async function handleSubmit(e) {
     e.preventDefault();
     // send email, pass, name to gql
-    const res = await signup().catch(console.error);
+    const res = await reset().catch(console.error);
     console.log('res', res);
+    console.log({ data, loading, error });
     resetForm();
   }
 
   return (
     // eslint-disable-next-line react/jsx-no-bind
     <Form method="POST" onSubmit={handleSubmit}>
-      <h2>Sign Up For An Account</h2>
-      <Error error={error} />
+      <h2>Reset Your Password</h2>
+      <Error error={successfulError || error} />
       <fieldset>
-        {data?.createUser && (
-          <ParaStyle>
-            Horray! You signed up with {data.createUser.email} - Please go ahead
-            and sign in!
-          </ParaStyle>
+        {data?.redeemUserPasswordResetToken === null && (
+          <ParaStyle>Success</ParaStyle>
         )}
-        <label htmlFor="name">
-          Full Name
-          <input
-            type="text"
-            name="name"
-            placeholder="first and last name"
-            autoComplete="name"
-            value={inputs.name}
-            onChange={handleChange}
-          />
-        </label>
         <label htmlFor="email">
           Email
           <input
@@ -88,7 +84,7 @@ export default function SignUp() {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Sign In</button>
+        <button type="submit">Reset Password</button>
       </fieldset>
     </Form>
   );
