@@ -2,7 +2,7 @@ import 'dotenv/config';
 import {
   createTransport,
   getTestMessageUrl,
-  SentMessageInfo,
+  // SentMessageInfo,
 } from 'nodemailer';
 
 const transport = createTransport({
@@ -33,7 +33,7 @@ function makeANiceEmail(text: string): string {
 
 export interface Envelope {
   from: string;
-  to?: string[] | null;
+  to: string[] | null;
 }
 export interface MailResponse {
   accepted?: string[] | null;
@@ -62,6 +62,7 @@ export async function sendPasswordResetEmail(
   })) as MailResponse;
 
   if (process.env.MAIL_USER.includes('ethereal.email')) {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     console.log(`message sent! Preview it at ${getTestMessageUrl(info)}`);
   }
 }

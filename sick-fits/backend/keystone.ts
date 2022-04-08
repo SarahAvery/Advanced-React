@@ -9,6 +9,8 @@ import 'dotenv/config';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
 import { sendPasswordResetEmail } from './lib/mail';
+import { CartItem } from './schemas/CartItem';
+import { extendGraphqlSchema } from './mutations';
 // import { sendPasswordResetEmail } from './lib/mail';
 
 const databaseURL =
@@ -29,7 +31,6 @@ const { withAuth } = createAuth({
   },
   passwordResetLink: {
     async sendToken(args) {
-      console.log(args);
       // send the email
       await sendPasswordResetEmail(args.token, args.identity);
     },
@@ -49,12 +50,14 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem,
     }),
     db: {
       adapter: 'mongoose',
       url: databaseURL,
       // TODO: add data seeding  here
     },
+    extendGraphqlSchema,
     ui: {
       // TODO: change this for roles
       // show the ui for anyone who passes this test
