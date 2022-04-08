@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CartStyles = styled.div`
+export const CartStyles = styled.div`
   padding: 20px;
   position: relative;
   background: white;
@@ -40,8 +40,21 @@ const CartStyles = styled.div`
     margin: 0;
     padding: 0;
     list-style: none;
-    overflow: scroll;
+    overflow: hidden;
   }
 `;
 
-export default CartStyles;
+export const CartItemStyles = styled.li`
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--lightGrey);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  img {
+    margin-right: 1rem;
+    border: 1px solid var(--lightGrey);
+  }
+  h3,
+  p {
+    margin: 0;
+  }
+`;
