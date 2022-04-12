@@ -20,15 +20,21 @@ const DropDownItem = styled.div`
   img {
     margin-right: 10px;
   }
+
+  span {
+    color: var(--blue);
+    padding-left: 2px;
+    text-transform: uppercase;
+  }
 `;
 
 const glow = keyframes`
   from {
-    box-shadow: 0 0 0px yellow;
+    box-shadow: 0 0 0px var(--blue);
   }
 
   to {
-    box-shadow: 0 0 10px 1px yellow;
+    box-shadow: 0 0 10px 1px var(--blue);
   }
 `;
 
