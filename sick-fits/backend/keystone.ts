@@ -4,6 +4,7 @@ import {
   withItemData,
   statelessSessions,
 } from '@keystone-next/keystone/session';
+import { GraphQLConfig } from '@keystone-next/types';
 import { User } from './schemas/User';
 import 'dotenv/config';
 import { Product } from './schemas/Product';
@@ -67,5 +68,8 @@ export default withAuth(
     session: withItemData(statelessSessions(sessionConfig), {
       User: 'id',
     }),
+    graphql: {
+      debug: true,
+    } as GraphQLConfig,
   })
 );
