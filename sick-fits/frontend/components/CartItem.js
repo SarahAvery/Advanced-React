@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import formatMoney from '../lib/formatMoney';
+import RemoveFromCart from './RemoveFromCart';
 import { CartItemStyles } from './styles/CartStyles';
 
 const CartItem = ({ cartItem }) => {
@@ -22,6 +23,7 @@ const CartItem = ({ cartItem }) => {
           </span>
         </p>
       </div>
+      <RemoveFromCart id={cartItem.id} />
     </CartItemStyles>
   );
 };
