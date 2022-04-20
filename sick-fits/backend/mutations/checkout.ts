@@ -11,7 +11,8 @@ async function checkout(
   { token }: { token: string },
   context: KeystoneContext
 ): Promise<OrderCreateInput> {
-// user signed in?
+
+  // user signed in?
   const userId = context.session.itemId;
   if (!userId) {
     throw new Error('Sorry, you must be signed in to create an order.')
@@ -61,9 +62,41 @@ async function checkout(
     throw new Error(err.message)
 })
 
+console.log(charge)
   // convert cartitems to orderitems
 
+  const orderItems = cartItems.map((cartItem) => {
+      const orderItem = {
+        name: cartItem.product.name,
+        description: cartItem.product.description,
+        price: cartItem.product.price,
+        quantity: cartItem.price,
+        photo: {
+          connect: {
+            id: cartItem.product.photo.id,
+          },
+        }
+      }
+      return orderItem
+    });
+
+
   // create order and return
+  const order = await context.lists.Order.createOne({
+    data: {
+      total: charge.amount,
+      charge: charge.id,
+      items: { create: orderItems },
+      user: { connect: { id: userId } }
+    }
+  });
+
+  // Clean up old cart items
+  const cartItemIds = user.cart.map(cartItem => cartItem.id);
+  await context.lists.CartItem.deleteMany({
+    ids: cartItemIds
+  });
+  return order
 
 }
 
