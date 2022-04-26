@@ -70,7 +70,7 @@ console.log(charge)
         name: cartItem.product.name,
         description: cartItem.product.description,
         price: cartItem.product.price,
-        quantity: cartItem.price,
+        quantity: cartItem.quantity,
         photo: {
           connect: {
             id: cartItem.product.photo.id,
