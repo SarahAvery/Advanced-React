@@ -22,7 +22,7 @@ async function addToCart(
         id: productId,
       },
     },
-    resolveFields: 'id, quantity'
+    resolverFields: 'id, quantity'
   });
 
   
