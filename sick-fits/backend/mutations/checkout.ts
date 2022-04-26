@@ -49,7 +49,6 @@ async function checkout(
   const amount = cartItems.reduce(function (tally: number, cartItem: CartItemCreateInput) {
     return tally + cartItem.quantity * cartItem.product.price;
   }, 0);
-  console.log(amount)
 
   // create charge w strip lib
   const charge = await stripConfig.paymentIntents.create({
@@ -58,7 +57,6 @@ async function checkout(
     confirm: true,
     payment_method: token,
   }).catch(err => {
-    console.log(err);
     throw new Error(err.message)
 })
 

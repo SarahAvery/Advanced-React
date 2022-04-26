@@ -16,13 +16,8 @@ async function addToCart(
   }
   // query current user cart
   const allCartItems = await context.lists.CartItem.findMany({
-    where: {
-      user: { id: sesh.itemId },
-      product: {
-        id: productId,
-      },
-    },
-    resolverFields: 'id, quantity'
+    where: { user: { id: sesh.itemId }, product: { id: productId } },
+    resolveFields: 'id,quantity'
   });
 
   
