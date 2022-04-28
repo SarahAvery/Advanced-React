@@ -60,8 +60,6 @@ export default function OrdersPage() {
 
   const { allOrders } = data;
 
-  console.log(allOrders.items);
-
   return (
     <div>
       <Head>
