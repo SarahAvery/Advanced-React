@@ -2,7 +2,6 @@ import { MockedProvider } from '@apollo/client/testing';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SignUp, { SIGNUP_MUTATION } from '../components/SignUp';
-import { CURRENT_USER_QUERY } from '../components/User';
 import { fakeUser } from '../lib/testUtils';
 
 const me = fakeUser();
@@ -43,7 +42,7 @@ describe('<SignUp/>', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it.only('Calls the mutation properly', async () => {
+  it('Calls the mutation properly', async () => {
     const { container, debug } = render(
       <MockedProvider mocks={mock}>
         <SignUp />
