@@ -33,6 +33,7 @@ const SINGLE_ITEM_QUERY = gql`
   }
 `;
 
+// eslint-disable-next-line react/prop-types
 export default function SingleProduct({ id }) {
   const { data, error, loading } = useQuery(SINGLE_ITEM_QUERY, {
     variables: {
@@ -44,7 +45,7 @@ export default function SingleProduct({ id }) {
 
   const { Product } = data;
   return (
-    <ProductStyles>
+    <ProductStyles data-testid="singleProduct">
       <Head>
         <title>Sick Fits | {Product.name}</title>
       </Head>
@@ -59,3 +60,5 @@ export default function SingleProduct({ id }) {
     </ProductStyles>
   );
 }
+
+export { SINGLE_ITEM_QUERY };
