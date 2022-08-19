@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import Head from "next/head";
-import Link from "next/link";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/client";
-import PaginationStyles from "./styles/PaginationStyles";
-import DisplayError from "./ErrorMessage";
-import { perPage } from "../config";
+import styled from 'styled-components';
+import Head from 'next/head';
+import Link from 'next/link';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
+import PaginationStyles from './styles/PaginationStyles';
+import DisplayError from './ErrorMessage';
+import { perPage } from '../config';
 
 export const PAGINATION_QUERY = gql`
   query {
@@ -32,7 +32,7 @@ export default function Pagination({ page }) {
 
   return (
     <PaginationContainer>
-      <PaginationStyles>
+      <PaginationStyles data-testid="pagination">
         <Head>
           <title>
             Sick Fits - Page {page} of {pageCount}

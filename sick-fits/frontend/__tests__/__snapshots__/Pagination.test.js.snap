@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pagination/> Displays a loading message 1`] = `
+<div>
+  <p>
+    Loading...
+  </p>
+</div>
+`;
+
+exports[`<Pagination/> Renders pagination for 18 items 1`] = `
+<div>
+  <div
+    class="Pagination__PaginationContainer-sc-w8etnd-0 gzbFKH"
+  >
+    <div
+      class="PaginationStyles-sc-aduuar-0 kNLCHA"
+      data-testid="pagination"
+    >
+      <a
+        aria-disabled="true"
+        href="/products/0"
+      >
+        ← Prev
+      </a>
+      <p>
+        Page 
+        1
+         of 
+        9
+      </p>
+      <p>
+        18
+         Items Total
+      </p>
+      <a
+        aria-disabled="false"
+        href="/products/2"
+      >
+        Next →
+      </a>
+    </div>
+  </div>
+</div>
+`;
